@@ -1,0 +1,32 @@
+#ifndef FILM_H
+#define FILM_H
+
+#include <iostream>
+#include <string>
+
+class Film {
+private:
+    std::string titlu;
+    std::string regizor;
+    std::string review;
+    int anLansare;
+    int durata;
+    float rating;
+    bool vazut;
+public:
+    Film(const std::string& _titlu, const std::string& _regizor, const std::string& _review,
+        const int _anLansare, const int _durata, const float _rating, const bool _vazut);
+
+    Film& operator=(const Film& other);
+
+    bool operator<(const Film& other) const;
+
+    friend std::ostream& operator<<(std::ostream&, const Film&);
+    friend std::istream& operator>>(std::istream&, Film&);
+
+    [[nodiscard]] std::string getTitlu() const;
+    [[nodiscard]] float getRating() const;
+
+    ~Film();
+};
+#endif

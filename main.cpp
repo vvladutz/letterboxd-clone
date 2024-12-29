@@ -1,48 +1,139 @@
+#include <algorithm>
 #include <iostream>
-#include <array>
+#include <string>
+#include <vector>
+#include "clase/Film.h"
+#include "clase/Lista.h"
+
+void print_menu() {
+    std::cout << "1. adauga film" << std::endl;
+    std::cout << "2. sterge film" << std::endl;
+    std::cout << "3. vezi filmele adaugate" << std::endl;
+    std::cout << "4. creaza o lista" << std::endl;
+    std::cout << "5. vezi listele create" << std::endl;
+    std::cout << "6. vezi filmele vazute" << std::endl;
+    std::cout << "7. vezi filmele pe care doresti sa le vezi" << std::endl;
+    std::cout << "8. recomandare film random" << std::endl;
+    std::cout << "9. vezi o lista creata" << std::endl;
+    std::cout << "0. iesi din meniu" << std::endl;
+    std::cout << "alegerea ta: ";
+}
+
+Lista adauga_lista(std::vector<Film>& filme) {
+    std::string nume, description;
+    std::cout << "numele listei:\n";
+    std::getline(std::cin, nume, '\n');
+    std::cout << "descriere:\n";
+    std::getline(std::cin, description, '\n');
+
+    Lista l(nume, description, filme);
+    std::cout << "lista creata!\n";
+    return l;
+}
 
 int main() {
-    std::cout << "Hello, world!\n";
-    std::array<int, 100> v{};
-    int nr;
-    std::cout << "Introduceți nr: ";
-    /////////////////////////////////////////////////////////////////////////
-    /// Observație: dacă aveți nevoie să citiți date de intrare de la tastatură,
-    /// dați exemple de date de intrare folosind fișierul tastatura.txt
-    /// Trebuie să aveți în fișierul tastatura.txt suficiente date de intrare
-    /// (în formatul impus de voi) astfel încât execuția programului să se încheie.
-    /// De asemenea, trebuie să adăugați în acest fișier date de intrare
-    /// pentru cât mai multe ramuri de execuție.
-    /// Dorim să facem acest lucru pentru a automatiza testarea codului, fără să
-    /// mai pierdem timp de fiecare dată să introducem de la zero aceleași date de intrare.
-    ///
-    /// Pe GitHub Actions (bife), fișierul tastatura.txt este folosit
-    /// pentru a simula date introduse de la tastatură.
-    /// Bifele verifică dacă programul are erori de compilare, erori de memorie și memory leaks.
-    ///
-    /// Dacă nu puneți în tastatura.txt suficiente date de intrare, îmi rezerv dreptul să vă
-    /// testez codul cu ce date de intrare am chef și să nu pun notă dacă găsesc vreun bug.
-    /// Impun această cerință ca să învățați să faceți un demo și să arătați părțile din
-    /// program care merg (și să le evitați pe cele care nu merg).
-    ///
-    /////////////////////////////////////////////////////////////////////////
-    std::cin >> nr;
-    /////////////////////////////////////////////////////////////////////////
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "v[" << i << "] = ";
-        std::cin >> v[i];
+    int raspuns;
+    std::vector<Film> filme;
+    std::vector<Lista> lista;
+    std::vector<std::string> film_lista;
+    std::vector<Film> lista_filme;
+    std::string filmulet;
+
+    while (true) {
+        lista_filme.clear();
+        print_menu();
+        std::cin >> raspuns;
+        std::cin.ignore();
+        switch (raspuns) {
+            case 0: {
+                std::cout << "multumesc pentru folosirea aplicatiei!" << std::endl;
+                return false;
+            }
+
+            case 1: {
+                Film f("", "", "", 0, 0, 0, false);
+                std::cin >> f;
+                int ok = 0;
+                for (auto const& e : filme) {
+                    if (e.getTitlu() == f.getTitlu()) {
+                        ok = 1;
+                        std::cout << "acest film deja exista!\n";
+                        break;
+                    }
+                }
+                if (!ok) {
+                    filme.push_back(f);
+                    std::cout << "film adaugat!\n";
+                }
+                break;
+            }
+
+            case 3: {
+                std::cout << "cum vreti sa fie ordonate filmele?\n";
+                std::cout << "1. in ordinea originala\n";
+                std::cout << "2. dupa titlu\n";
+                std::cout << "alegerea ta: ";
+                std::cin >> raspuns;
+                switch (raspuns) {
+                    case 1: {
+                        for (const auto& f : filme) {
+                            std::cout << f << std::endl;
+                        }
+                        break;
+                    }
+                    case 2: {
+                        std::sort(filme.begin(), filme.end());
+                        for (const auto& f : filme) {
+                            std::cout << f << std::endl;
+                        }
+                        break;
+                    }
+                    default: {
+                        std::cout << "nu inteleg.\n";
+                        break;
+                    }
+                }
+                break;
+            }
+
+            case 4: {
+                int n;
+                std::cout << "cate filme doresti sa adaugi?\n";
+                std::cin >> n;
+                std::cout << "ce filme doresti sa adaugi? poti adauga doar filme create deja!\n";
+                std::cin.ignore();
+                for (int i = 0; i < n; i++) {
+                    std::getline(std::cin, filmulet, '\n');
+                    film_lista.push_back(filmulet);
+                }
+                int ok = 0;
+                for (const auto &f : filme) {
+                    for (const auto &fl : film_lista)
+                        if (fl == f.getTitlu()) {
+                            std::cout << "film gasit!\n"; ok = 1;
+                            lista_filme.push_back(f);
+                        }
+                }
+                if (ok) {
+                    lista.push_back(adauga_lista(lista_filme));
+                }
+
+                else std::cout << "niciun film nu a fost gasit!\n";
+                break;
+            }
+
+            case 5: {
+                for (const auto& l : lista) {
+                    std::cout << l << std::endl;
+                }
+                break;
+            }
+
+            default: {
+                std::cout << "nu inteleg." << std::endl;
+                break;
+            }
+
+        }
     }
-    std::cout << "\n\n";
-    std::cout << "Am citit de la tastatură " << nr << " elemente:\n";
-    for(int i = 0; i < nr; ++i) {
-        std::cout << "- " << v[i] << "\n";
-    }
-    ///////////////////////////////////////////////////////////////////////////
-    /// Pentru date citite din fișier, NU folosiți tastatura.txt. Creați-vă voi
-    /// alt fișier propriu cu ce alt nume doriți.
-    /// Exemplu:
-    /// std::ifstream fis("date.txt");
-    /// for(int i = 0; i < nr2; ++i)
-    ///     fis >> v2[i];
-    return 0;
 }
