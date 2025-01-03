@@ -2,19 +2,16 @@
 #include <iostream>
 #include <string>
 
-Film::Film(const std::string& _titlu="", const std::string& _regizor="", const std::string& _review="",
-        const int _anLansare=0, const int _durata=0, const float _rating=0, const bool _vazut=false)
-    : titlu{_titlu}, regizor{_regizor}, review{_review}, anLansare{_anLansare}, durata{_durata}, rating{_rating},
-    vazut{_vazut} {}
+Film::Film(const std::string& _titlu="", const std::string& _regizor="",
+        const int _anLansare=0, const int _durata=0, const float _rating=0)
+    : titlu{_titlu}, regizor{_regizor}, anLansare{_anLansare}, durata{_durata}, rating{_rating} {}
 
 Film& Film::operator=(const Film& other) {
     this->titlu = other.titlu;
     this->regizor = other.regizor;
-    this->review = other.review;
     this->anLansare = other.anLansare;
     this->durata = other.durata;
     this->rating = other.rating;
-    this->vazut = other.vazut;
     return *this;
 }
 
@@ -26,15 +23,12 @@ bool Film::operator< (const Film &other) const {
 std::ostream& operator<<(std::ostream &os, const Film &film) {
     os << "filmul " << film.titlu << " regizat de " << film.regizor << std::endl;
     os << "anul lansarii: " << film.anLansare << std::endl;
-    os << "review: " << film.review << std::endl;
     if (film.durata > 60) {
         os << "durata: " << film.durata/60 << "h ";
         (film.durata % 60 > 0) ? os << film.durata%60 << "m\n" : os << std::endl;
     }
     else os << "durata: " << film.durata%60 << " min\n";
     os << "rating: " << film.rating << std::endl;
-    if (film.vazut) os << "vazut!" << std::endl;
-    else os << "nu a fost vazut!" << std::endl;
     return os;
 }
 

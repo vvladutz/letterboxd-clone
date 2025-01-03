@@ -14,8 +14,8 @@ private:
     float rating;
     bool vazut;
 public:
-    Film(const std::string& _titlu, const std::string& _regizor, const std::string& _review,
-        const int _anLansare, const int _durata, const float _rating, const bool _vazut);
+    Film(const std::string& _titlu, const std::string& _regizor,
+        const int _anLansare, const int _durata, const float _rating);
 
     Film& operator=(const Film& other);
 
