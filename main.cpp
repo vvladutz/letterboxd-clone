@@ -39,6 +39,27 @@ int main() {
     std::vector<Film> lista_filme;
     std::string filmulet;
 
+    filme.emplace_back("Evil Dead 2", "Sam Raimi", 1987, 84, 4.0);
+    filme.emplace_back("Wild Strawberries", "Ingmar Bergman", 1957, 91, 4.3);
+    filme.emplace_back("Mystery Train", "Jim Jarmusch", 1989, 106, 4.0);
+    filme.emplace_back("High and Low", "Akira Kurosawa", 1963, 142, 4.6);
+    filme.emplace_back("In The Mood For Love", "Wong Kar-Wai", 2000, 99, 4.4);
+    filme.emplace_back("Chungking Express", "Wong Kar-Wai", 1994, 103, 4.3);
+    filme.emplace_back("Do The Right Thing", "Spike Lee", 1989, 120, 4.4);
+    filme.emplace_back("Interstellar", "Cristopher Nolan", 2014, 169, 4.4);
+    filme.emplace_back("Repo Man", "Alex Cox", 1984, 92, 3.7);
+    filme.emplace_back("Aftersun", "Charlotte Wells", 2022, 101, 4.2);
+    filme.emplace_back("The Thing", "John Carpenter", 1982, 109, 4.4);
+    filme.emplace_back("Little Shop of Horrors", "Frank Oz", 1986, 94, 3.9);
+    filme.emplace_back("Whiplash", "Damien Chazelle", 2014, 107, 4.4);
+    filme.emplace_back("Twin Peaks: Fire Walk With Me", "David Lynch", 1992, 135, 4.2);
+    filme.emplace_back("12 Angry Men", "Sidney Lumet", 1957, 97, 4.6);
+    filme.emplace_back("A Trip To The Moon", "Georges Méliès", 1902, 15, 4.0);
+    filme.emplace_back("Little Miss Sunshine", "Valerie Faris, Jonathan Dayton", 2006, 102, 4.2);
+    filme.emplace_back("The End of Evangelion", "Hideaki Anno, Kazuya Tsurumaki", 1997, 87, 4.5);
+    filme.emplace_back("House", "Nobuhiko Obayashi", 1977, 88, 4.0);
+    filme.emplace_back("The Rocky Horror Picture Show", "Jim Sharman", 1975, 100, 4.0);
+
     while (true) {
         lista_filme.clear();
         print_menu();
@@ -51,7 +72,7 @@ int main() {
             }
 
             case 1: {
-                Film f("", "", "", 0, 0, 0, false);
+                Film f("", "", 0, 0, 0);
                 std::cin >> f;
                 int ok = 0;
                 for (auto const& e : filme) {
