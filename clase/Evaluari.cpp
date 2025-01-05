@@ -11,14 +11,14 @@ Evaluari &Evaluari::getEvaluare() {
     return evaluare;
 }
 
-void Evaluari::adaugaEvaluare(const std::string &film, int rating) {
-    evaluari[film].push_back(rating);
+void Evaluari::adaugaEvaluare(const Film &film, int rating) {
+    evaluari[film.getTitlu()].push_back(rating);
 }
 
-void Evaluari::afiseazaEvaluari(const std::string &film) {
-    if (evaluari.find(film) != evaluari.end()) {
+void Evaluari::afiseazaEvaluari(const Film &film) {
+    if (evaluari.find(film.getTitlu()) != evaluari.end()) {
         std::cout << "evaluari pt: " << film << std::endl;
-        for (const auto& rating : evaluari[film]) {
+        for (const auto& rating : evaluari[film.getTitlu()]) {
             std::cout << rating << std::endl;
         }
     }

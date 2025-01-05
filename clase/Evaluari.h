@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "Film.h"
 
 class Evaluari {
 private:
@@ -12,8 +13,8 @@ private:
     Evaluari();
 public:
     static Evaluari& getEvaluare();
-    void adaugaEvaluare(const std::string& film, int rating);
-    void afiseazaEvaluari(const std::string& film);
+    void adaugaEvaluare(const Film& film, int rating);
+    void afiseazaEvaluari(const Film& film);
 };
 
 #endif //EVALUARI_H
