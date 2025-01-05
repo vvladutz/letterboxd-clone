@@ -7,19 +7,24 @@
 #include "Film.h"
 
 class Utilizator {
-private:
+protected:
     std::string username;
     int varsta;
     std::vector<Film> filme_vazute;
 
 public:
-    Utilizator(std::string& username, int varsta, std::vector<Film>& filme_vazute);
+    Utilizator(const std::string& username, const int varsta, const std::vector<Film>& filme_vazute);
     virtual ~Utilizator();
 
+    std::string getUsername() const;
+    virtual int getRole() const;
     virtual void afiseazaFilmeVazute() const;
-    virtual void evalueazaFilm(const std::string& film, float rating) const;
+    virtual void evalueazaFilm(const Film& film, float rating) const;
+    virtual void afiseaza(std::ostream &os) const;
 
-    friend std::ostream& operator<<(std::ostream& os, const Utilizator& l);
-    friend std::istream& operator>>(std::istream&, Utilizator&);
+    friend std::ostream& operator<<(std::ostream& os, const Utilizator& util);
+    friend std::istream& operator>>(std::istream&, Utilizator& util);
+
+    Utilizator& operator=(const Utilizator& other);
 };
 #endif //UTILIZATOR_H
