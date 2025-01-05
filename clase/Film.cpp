@@ -1,6 +1,8 @@
 #include "Film.h"
 #include <iostream>
 #include <string>
+#include <vector>
+#include <algorithm>
 
 Film::Film(const std::string& _titlu="", const std::string& _regizor="",
         const int _anLansare=0, const int _durata=0, const float _rating=0)
@@ -14,6 +16,16 @@ Film& Film::operator=(const Film& other) {
     this->rating = other.rating;
     return *this;
 }
+
+void Film::stergeRecenzie(const std::string &recenzie) {
+    auto it = std::find(recenzii.begin(), recenzii.end(), recenzie);
+    if (it != recenzii.end()) {
+        recenzii.erase(it);
+    } else {
+        std::cout << "recenzia nu a fost gasita!\n";
+    }
+}
+
 
 bool Film::operator< (const Film &other) const {
     return (this->titlu < other.titlu);
@@ -38,9 +50,6 @@ std::istream& operator>>(std::istream &in, Film &film) {
 
     std::cout << "regizorul filmului:\n";
     std::getline(in, film.regizor);
-
-    std::cout << "review (opinie personala):\n";
-    std::getline(in, film.review, '\n');
 
     std::cout << "an lansare:\n";
     in >> film.anLansare;

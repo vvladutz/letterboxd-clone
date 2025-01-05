@@ -19,7 +19,7 @@ public:
     [[nodiscard]] std::vector<Film> getFilme() const;
 
     friend std::ostream& operator<<(std::ostream& os, const Lista& l);
-    friend std::istream& operator>>(std::istream&, Lista&);
+    friend std::istream& operator>>(std::istream&, Lista &l);
 
     [[nodiscard]] float average_rating() const;
 

@@ -18,12 +18,12 @@ std::ostream& operator<<(std::ostream &os, const Lista &l) {
     return os;
 }
 
-std::istream& operator>>(std::istream &in, Lista &lista) {
+std::istream& operator>>(std::istream &in, Lista &l) {
     std::string nume, description;
     std::cout << "numele listei:\n";
-    std::getline(in, nume, '\n');
+    std::getline(in, l.nume, '\n');
     std::cout << "descriere:\n";
-    std::getline(in, description, '\n');
+    std::getline(in, l.descriere, '\n');
 
     return in;
 }
