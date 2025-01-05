@@ -1,9 +1,13 @@
 #include <algorithm>
+#include <memory>
 #include <iostream>
 #include <string>
 #include <vector>
 #include "clase/Film.h"
 #include "clase/Lista.h"
+#include "clase/Utilizator.h"
+#include "clase/Critic.h"
+#include "clase/Admin.h"
 
 void print_menu() {
     std::cout << "1. adauga film" << std::endl;
@@ -11,12 +15,12 @@ void print_menu() {
     std::cout << "3. vezi filmele adaugate" << std::endl;
     std::cout << "4. creaza o lista" << std::endl;
     std::cout << "5. vezi listele create" << std::endl;
-    std::cout << "6. vezi filmele vazute" << std::endl;
-    std::cout << "7. vezi filmele pe care doresti sa le vezi" << std::endl;
+    std::cout << "6. meniu utilizatori" << std::endl;
+    std::cout << "7. vezi conturile create" << std::endl;
     std::cout << "8. recomandare film random" << std::endl;
-    std::cout << "9. vezi o lista creata" << std::endl;
+    std::cout << "9. creaza un cont" << std::endl;
     std::cout << "0. iesi din meniu" << std::endl;
-    std::cout << "alegerea ta: ";
+    std::cout << "alegerea ta: \n";
 }
 
 Lista adauga_lista(std::vector<Film>& filme) {
@@ -31,6 +35,53 @@ Lista adauga_lista(std::vector<Film>& filme) {
     return l;
 }
 
+Utilizator adauga_utilizator(std::vector<Film>& filme) {
+    std::string nume;
+    int varsta;
+    std::cout << "username:\n";
+    std::getline(std::cin, nume, '\n');
+    std::cout << "varsta:\n";
+    std::cin >> varsta;
+
+    Utilizator u(nume, varsta, filme);
+    std::cout << "utilizator creat!\n";
+    return u;
+}
+
+Critic adauga_critic(std::vector<Film>& filme) {
+    std::string nume;
+    int varsta;
+    std::cout << "username:\n";
+    std::getline(std::cin, nume, '\n');
+    std::cout << "varsta:\n";
+    std::cin >> varsta;
+
+    Critic c(nume, varsta, filme);
+    std::cout << "critic creat!\n";
+    return c;
+}
+
+Admin adauga_admin(std::vector<Film>& filme) {
+    std::string nume;
+    int varsta;
+    std::cout << "username:\n";
+    std::getline(std::cin, nume, '\n');
+    std::cout << "varsta:\n";
+    std::cin >> varsta;
+
+    Admin a(nume, varsta, filme);
+    std::cout << "admin creat!\n";
+    return a;
+}
+
+int check_for_movie(std::vector<Film>& filme, std::vector<std::string> film) {
+    for (const auto &f : filme)
+        for (const auto &fl : film)
+            if (fl == f.getTitlu())
+                return &f-&filme[0];
+
+    return -1;
+}
 int main() {
     int raspuns;
     std::vector<Film> filme;
@@ -38,6 +89,7 @@ int main() {
     std::vector<std::string> film_lista;
     std::vector<Film> lista_filme;
     std::string filmulet;
+    std::vector<std::shared_ptr<Utilizator>> utilizatori;
 
     filme.emplace_back("Evil Dead 2", "Sam Raimi", 1987, 84, 4.0);
     filme.emplace_back("Wild Strawberries", "Ingmar Bergman", 1957, 91, 4.3);
@@ -59,12 +111,29 @@ int main() {
     filme.emplace_back("The End of Evangelion", "Hideaki Anno, Kazuya Tsurumaki", 1997, 87, 4.5);
     filme.emplace_back("House", "Nobuhiko Obayashi", 1977, 88, 4.0);
     filme.emplace_back("The Rocky Horror Picture Show", "Jim Sharman", 1975, 100, 4.0);
+    filme.emplace_back("The Lord of the Rings: The Fellowship of the Ring", "Peter Jackson", 2001, 179, 4.4);
+
+    std::vector<Film>::const_iterator first = filme.begin() + 5;
+    std::vector<Film>::const_iterator last = filme.begin() + 7;
+    std::vector<Film> newFilme(first, last);
+    utilizatori.emplace_back(std::make_shared<Utilizator>("andi", 20, newFilme));
+
+    first = filme.begin() + 1;
+    last = filme.begin() + 7;
+    newFilme.assign(first, last);
+    utilizatori.emplace_back(std::make_shared<Critic>("diana072", 21, newFilme));
+
+    first = filme.begin() + 10;
+    last = filme.begin() + 15;
+    newFilme.assign(first, last);
+    utilizatori.emplace_back(std::make_shared<Admin>("vvladutz", 21, newFilme));
 
     while (true) {
         lista_filme.clear();
         print_menu();
         std::cin >> raspuns;
         std::cin.ignore();
+
         switch (raspuns) {
             case 0: {
                 std::cout << "multumesc pentru folosirea aplicatiei!" << std::endl;
@@ -146,6 +215,165 @@ int main() {
             case 5: {
                 for (const auto& l : lista) {
                     std::cout << l << std::endl;
+                }
+                break;
+            }
+
+            case 6: {
+                int crt = 0;
+                int userId;
+                std::cout << "alege un utilizator!\n";
+                for (const auto &u : utilizatori) {
+                    std::cout << ++crt << ". " << u->getUsername() << std::endl;
+                }
+                std::cin >> userId;
+                switch (utilizatori[--userId]->getRole()) {
+                    case 1: {
+                        std::cout << "alege ce doresti sa faci:\n";
+                        std::cout << "1. afiseaza filmele vazute\n";
+                        std::cout << "2. evalueaza un film\n";
+                        std::cin >> raspuns;
+                        switch (raspuns) {
+                            case 1: {
+                                utilizatori[userId]->afiseazaFilmeVazute();
+                                break;
+                            }
+                            case 2: {
+                                int ok=0;
+                                std::cout << "ce film doresti sa evaluezi?\n";
+                                std::cin.ignore();
+                                std::getline(std::cin, filmulet, '\n');
+                                film_lista.push_back(filmulet);
+                                if (check_for_movie(filme, film_lista)) {
+                                    int rating;
+                                    std::cout << "ce rating doresti sa ii dai?";
+                                    std::cin >> rating;
+                                    utilizatori[userId]->evalueazaFilm(filme[check_for_movie(filme, film_lista)], rating);
+                                }
+                                break;
+                            }
+                            default: {
+                                std::cout << "nu inteleg.\n";
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                    case 2: {
+                        std::cout << "critic!\n";
+                        break;
+                    }
+                    case 3: {
+                        std::cout << "admin!\n";
+                        break;
+                    }
+                    default: {
+                        std::cout << "nu inteleg.\n";
+                        break;
+                    }
+                }
+                break;
+            }
+
+            case 7: {
+                for (const auto &u : utilizatori) {
+                    std::cout << *u << std::endl;
+                }
+                break;
+            }
+
+            case 9: {
+                std::cout << "ce fel de cont doresti sa creezi?\n";
+                std::cout << "1. utilizator basic\n";
+                std::cout << "2. critic\n";
+                std::cout << "3. admin\n";
+                std::cout << "raspunsul tau:\n";
+                std::cin >> raspuns;
+                std::cin.ignore();
+                switch (raspuns) {
+                    case 1: {
+                        int n;
+                        std::cout << "cate filme ai vazut?\n";
+                        std::cin >> n;
+                        std::cin.ignore();
+                        std::cout << "ce filme ai vazut?\n";
+                        for (int i = 0; i < n; i++) {
+                            std::getline(std::cin, filmulet, '\n');
+                            film_lista.push_back(filmulet);
+                        }
+                        int ok = 0;
+                        for (const auto &f : filme) {
+                            for (const auto &fl : film_lista)
+                                if (fl == f.getTitlu()) {
+                                    std::cout << "film gasit!\n"; ok = 1;
+                                    lista_filme.push_back(f);
+                                }
+                        }
+                        if (ok) {
+                            utilizatori.push_back(std::make_shared<Utilizator>(adauga_utilizator(lista_filme)));
+                        }
+                        else std::cout << "niciun film nu a fost gasit!\n";
+
+
+                        break;
+                    }
+
+                    case 2: {
+                        int n;
+                        std::cout << "cate filme ai vazut?\n";
+                        std::cin >> n;
+                        std::cin.ignore();
+                        std::cout << "ce filme ai vazut?\n";
+                        for (int i = 0; i < n; i++) {
+                            std::getline(std::cin, filmulet, '\n');
+                            film_lista.push_back(filmulet);
+                        }
+                        int ok = 0;
+                        for (const auto &f : filme) {
+                            for (const auto &fl : film_lista)
+                                if (fl == f.getTitlu()) {
+                                    std::cout << "film gasit!\n"; ok = 1;
+                                    lista_filme.push_back(f);
+                                }
+                        }
+                        if (ok) {
+                            utilizatori.push_back(std::make_shared<Utilizator>(adauga_critic(lista_filme)));
+                        }
+                        else std::cout << "niciun film nu a fost gasit!\n";
+
+
+                        break;
+                    }
+                    case 3: {
+                        int n;
+                        std::cout << "cate filme ai vazut?\n";
+                        std::cin >> n;
+                        std::cin.ignore();
+                        std::cout << "ce filme ai vazut?\n";
+                        for (int i = 0; i < n; i++) {
+                            std::getline(std::cin, filmulet, '\n');
+                            film_lista.push_back(filmulet);
+                        }
+                        int ok = 0;
+                        for (const auto &f : filme) {
+                            for (const auto &fl : film_lista)
+                                if (fl == f.getTitlu()) {
+                                    std::cout << "film gasit!\n"; ok = 1;
+                                    lista_filme.push_back(f);
+                                }
+                        }
+                        if (ok) {
+                            utilizatori.push_back(std::make_shared<Utilizator>(adauga_admin(lista_filme)));
+                        }
+                        else std::cout << "niciun film nu a fost gasit!\n";
+
+
+                        break;
+                    }
+                    default: {
+                        std::cout << "nu inteleg.";
+                        break;
+                    }
                 }
                 break;
             }
