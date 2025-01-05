@@ -5,7 +5,7 @@
 #include "Film.h"
 #include "Evaluari.h"
 
-Utilizator::Utilizator(std::string& _username, int _varsta, std::vector<Film>& _filme_vazute) : username{std::move(_username)},
+Utilizator::Utilizator(const std::string& _username, const int _varsta, const std::vector<Film>& _filme_vazute) : username{std::move(_username)},
                 varsta{_varsta}, filme_vazute{std::move(_filme_vazute)} {}
 
 Utilizator::~Utilizator() {
@@ -18,7 +18,7 @@ void Utilizator::afiseazaFilmeVazute() const {
         }
 }
 
-void Utilizator::evalueazaFilm(const std::string &film, float rating) const {
+void Utilizator::evalueazaFilm(const Film &film, float rating) const {
     Evaluari::getEvaluare().adaugaEvaluare(film, rating);
     std::cout << username << "(UTILIZATOR BASIC) a evaluat " << film << " cu " << rating << " stele" << std::endl;
 }
@@ -33,6 +33,15 @@ Utilizator& Utilizator::operator=(const Utilizator& other) {
     return *this;
 }
 
+std::string Utilizator::getUsername() const {
+    return username;
+}
+
+int Utilizator::getRole() const {
+    return 1;
+}
+
+
 std::istream& operator>>(std::istream &in, Utilizator &util) {
     std::cout << "username:\n";
     std::getline(in, util.username, '\n');
@@ -44,12 +53,17 @@ std::istream& operator>>(std::istream &in, Utilizator &util) {
     return in;
 }
 
-std::ostream& operator<<(std::ostream &os, const Utilizator &u) {
-    os << "username: " << u.username << std::endl;
-    os << "varsta: " << u.varsta << std::endl;
+std::ostream& operator<<(std::ostream &os, const Utilizator &util) {
+    util.afiseaza(os);
+    return os;
+}
+
+void Utilizator::afiseaza(std::ostream &os) const {
+    std::cout << "UTILIZATOR BASIC" << std::endl;
+    os << "username: " << username << std::endl;
+    os << "varsta: " << varsta << std::endl;
     os << "filme vazute: ";
-    for (const auto &e : u.filme_vazute) {
+    for (const auto &e : filme_vazute) {
         os << e.getTitlu() << std::endl;
     }
-    return os;
 }
