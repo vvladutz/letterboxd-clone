@@ -59,7 +59,7 @@ std::ostream& operator<<(std::ostream &os, const Utilizator &util) {
 }
 
 void Utilizator::afiseaza(std::ostream &os) const {
-    std::cout << "UTILIZATOR BASIC" << std::endl;
+    std::cout << "UTILIZATOR BASIC!" << std::endl;
     os << "username: " << username << std::endl;
     os << "varsta: " << varsta << std::endl;
     os << "filme vazute: ";

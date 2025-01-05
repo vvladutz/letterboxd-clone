@@ -27,4 +27,4 @@ public:
 
     Utilizator& operator=(const Utilizator& other);
 };
-#endif //UTILIZATOR_H
+#endif //UTILIZATOR_H!
