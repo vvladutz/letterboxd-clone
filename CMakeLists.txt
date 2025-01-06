@@ -124,7 +124,21 @@ FetchContent_MakeAvailable(googletest)
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-add_executable(${PROJECT_NAME} main.cpp ${SOURCES})
+add_executable(${PROJECT_NAME} main.cpp ${SOURCES}
+        clase/Film.h
+        clase/Film.cpp
+        clase/Lista.h
+        clase/Lista.cpp
+        clase/Utilizator.h
+        clase/Critic.h
+        clase/Admin.h
+        clase/Utilizator.cpp
+        clase/Evaluari.h
+        clase/Evaluari.cpp
+        clase/Critic.cpp
+        clase/Admin.cpp
+        clase/Recenzii.h
+        clase/Recenzii.cpp)
 
 ###############################################################################
 
