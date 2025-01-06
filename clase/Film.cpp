@@ -17,16 +17,6 @@ Film& Film::operator=(const Film& other) {
     return *this;
 }
 
-void Film::stergeRecenzie(const std::string &recenzie) {
-    auto it = std::find(recenzii.begin(), recenzii.end(), recenzie);
-    if (it != recenzii.end()) {
-        recenzii.erase(it);
-    } else {
-        std::cout << "recenzia nu a fost gasita!\n";
-    }
-}
-
-
 bool Film::operator< (const Film &other) const {
     return (this->titlu < other.titlu);
 }

@@ -46,6 +46,8 @@ float Lista::average_rating() const {
     return avg / static_cast<float>(filme.size());
 }
 
+
+
 Lista::~Lista() {
     filme.clear();
     std::cout << "lista stearsa!\n";

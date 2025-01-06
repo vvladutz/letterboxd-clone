@@ -20,7 +20,7 @@ void Utilizator::afiseazaFilmeVazute() const {
 
 void Utilizator::evalueazaFilm(const Film &film, float rating) const {
     Evaluari::getEvaluare().adaugaEvaluare(film, rating);
-    std::cout << username << "(UTILIZATOR BASIC) a evaluat " << film << " cu " << rating << " stele" << std::endl;
+    std::cout << username << "(UTILIZATOR BASIC) a evaluat " << film.getTitlu() << " cu " << rating << " stele" << std::endl;
 }
 
 

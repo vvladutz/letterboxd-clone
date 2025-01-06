@@ -4,6 +4,7 @@
 #include <string>
 #include "Film.h"
 #include "Evaluari.h"
+#include "Recenzii.h"
 
 Critic::Critic(const std::string &username, const int varsta, const std::vector<Film> &filme_vazute) : Utilizator(username, varsta, filme_vazute) {}
 
@@ -25,7 +26,8 @@ void Critic::evalueazaFilm(const Film &film, float rating) const {
     std::cout << username << "(CRITIC) a evaluat " << film << " cu " << rating << " stele" << std::endl;
 }
 
-void Critic::scrieRecenzie(const Film &film, const std::string &recenzie) const {
+void Critic::scrieRecenzie(const Film &film, std::string &recenzie) const {
+    Recenzii::getRecenzie().adaugaRecenzie(film, recenzie);
     std::cout << username << "(CRITIC) A SCRIS O RECENZIE PENTRU " << film << ": " << recenzie << std::endl;
 }
 

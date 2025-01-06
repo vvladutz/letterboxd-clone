@@ -4,12 +4,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 
 class Film {
 private:
     std::string titlu;
     std::string regizor;
-    std::vector<std::string> recenzii;
     int anLansare;
     int durata;
     float rating;
@@ -21,8 +21,6 @@ public:
     Film& operator=(const Film& other);
 
     bool operator<(const Film& other) const;
-
-    void stergeRecenzie(const std::string& recenzie);
 
     friend std::ostream& operator<<(std::ostream&, const Film&);
     friend std::istream& operator>>(std::istream&, Film&);

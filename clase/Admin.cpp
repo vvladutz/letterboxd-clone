@@ -4,6 +4,7 @@
 #include <string>
 #include "Film.h"
 #include "Evaluari.h"
+#include "Recenzii.h"
 
 Admin::Admin(const std::string &username, const int varsta, const std::vector<Film> &filme_vazute) : Utilizator(username, varsta, filme_vazute) {}
 
@@ -25,12 +26,13 @@ void Admin::evalueazaFilm(const Film& film, float rating) const {
     std::cout << username << "(ADMIN) a evaluat " << film.getTitlu() << " cu " << rating << " stele" << std::endl;
 }
 
-void Admin::scrieRecenzie(const Film& film, const std::string& recenzie) const {
+void Admin::scrieRecenzie(const Film& film, std::string& recenzie) const {
     std::cout << username << "(ADMIN) A SCRIS O RECENZIE PENTRU " << film.getTitlu() << ": " << recenzie << std::endl;
+    Recenzii::getRecenzie().adaugaRecenzie(film, recenzie);
 }
 
-void Admin::stergeRecenzie(Film& film, const std::string &recenzie) const {
-    film.stergeRecenzie(recenzie);
+void Admin::stergeRecenzie(const Film& film, std::string &recenzie) const {
+    Recenzii::getRecenzie().stergeRecenzie(film, recenzie);
     std::cout << username << " (ADMIN) A STERS RECENZIA PENTRU " << film.getTitlu() << std::endl;
 }
 
