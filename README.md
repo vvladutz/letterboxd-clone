@@ -1,4 +1,6 @@
-# Nu primesc notă pentru că nu am pus titlu și descriere
+# Clona Letterboxd
+Acest proiect are scopul de a imita site-ul Letterboxd, un site creat pentru cinefili,  
+Acest proiect a fost realizat pentru a copia site-ul Letterboxd, un site creat pentru a ajuta cinefilii să urmărească și să analizeze filmele vizionate. Proiectul are un meniu cu o mulțime de opțiuni, care gravitează în jurul creării utilizatorilor, adăugării de filme și realizării de liste cu filmele adăugate. Utilizatorii își pot urmări filmele vizionate, pot evalua filmele și (dacă au rolul de critic) pot revizui filmele. Administratorii pot șterge recenzii, dar nu și rating-uri! Aplicația poate recomanda chiar și un film aleatoriu de vizionat, deoarece vine cu peste 20 de filme adăugate de la început. Puteți vedea acțiunile anterioare ale utilizatorilor, listele create și filmele adăugate. Listele afișează automat rating-ul mediu al acestora.
 
 ## Cerințe obligatorii 
 
