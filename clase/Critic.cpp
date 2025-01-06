@@ -23,11 +23,13 @@ Critic& Critic::operator=(const Critic &other) {
 
 void Critic::evalueazaFilm(const Film &film, float rating) const {
     Evaluari::getEvaluare().adaugaEvaluare(film, rating);
+    istoric.push_back(username + " a evaluat filmul " + film.getTitlu());
     std::cout << username << "(CRITIC) a evaluat " << film << " cu " << rating << " stele" << std::endl;
 }
 
 void Critic::scrieRecenzie(const Film &film, std::string &recenzie) const {
     Recenzii::getRecenzie().adaugaRecenzie(film, recenzie);
+    istoric.push_back(username + " a scris o recenzie pentru filmul " + film.getTitlu());
     std::cout << username << "(CRITIC) A SCRIS O RECENZIE PENTRU " << film << ": " << recenzie << std::endl;
 }
 

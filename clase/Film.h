@@ -27,7 +27,6 @@ public:
 
     [[nodiscard]] std::string getTitlu() const;
     [[nodiscard]] float getRating() const;
-
     ~Film();
 };
 #endif

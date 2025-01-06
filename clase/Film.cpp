@@ -61,6 +61,4 @@ std::string Film::getTitlu() const {
     return this->titlu;
 }
 
-Film::~Film() {
-    std::cout << "film sters\n";
-}
+Film::~Film() {}

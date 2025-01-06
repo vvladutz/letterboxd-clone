@@ -23,16 +23,19 @@ Admin& Admin::operator=(const Admin& other) {
 
 void Admin::evalueazaFilm(const Film& film, float rating) const {
     Evaluari::getEvaluare().adaugaEvaluare(film, rating);
+    istoric.push_back(username + " a evaluat filmul " + film.getTitlu());
     std::cout << username << "(ADMIN) a evaluat " << film.getTitlu() << " cu " << rating << " stele" << std::endl;
 }
 
 void Admin::scrieRecenzie(const Film& film, std::string& recenzie) const {
     std::cout << username << "(ADMIN) A SCRIS O RECENZIE PENTRU " << film.getTitlu() << ": " << recenzie << std::endl;
+    istoric.push_back(username + " a scris o recenzie pentru filmul " + film.getTitlu());
     Recenzii::getRecenzie().adaugaRecenzie(film, recenzie);
 }
 
 void Admin::stergeRecenzie(const Film& film, std::string &recenzie) const {
     Recenzii::getRecenzie().stergeRecenzie(film, recenzie);
+    istoric.push_back(username + " a sters o recenzie pentru filmul " + film.getTitlu());
     std::cout << username << " (ADMIN) A STERS RECENZIA PENTRU " << film.getTitlu() << std::endl;
 }
 
