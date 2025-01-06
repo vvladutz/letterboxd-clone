@@ -3,22 +3,28 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <ctime>
 #include "clase/Film.h"
 #include "clase/Lista.h"
 #include "clase/Utilizator.h"
 #include "clase/Critic.h"
 #include "clase/Admin.h"
+#include "clase/Evaluari.h"
+#include "clase/Recenzii.h"
 
 void print_menu() {
     std::cout << "1. adauga film" << std::endl;
-    std::cout << "2. sterge film" << std::endl;
+    std::cout << "2. vezi numarul de utilizatori" << std::endl;
     std::cout << "3. vezi filmele adaugate" << std::endl;
-    std::cout << "4. creaza o lista" << std::endl;
+    std::cout << "4. creeaza o lista" << std::endl;
     std::cout << "5. vezi listele create" << std::endl;
     std::cout << "6. meniu utilizatori" << std::endl;
     std::cout << "7. vezi conturile create" << std::endl;
     std::cout << "8. recomandare film random" << std::endl;
-    std::cout << "9. creaza un cont" << std::endl;
+    std::cout << "9. creeaza un cont" << std::endl;
+    std::cout << "10. vezi evaluarile unui film" << std::endl;
+    std::cout << "11. vezi recenziile unui film" << std::endl;
+    std::cout << "12. vezi istoricul utilizatorilor" << std::endl;
     std::cout << "0. iesi din meniu" << std::endl;
     std::cout << "alegerea ta: \n";
 }
@@ -82,6 +88,7 @@ int check_for_movie(std::vector<Film>& filme, std::vector<std::string> film) {
 
     return -1;
 }
+
 int main() {
     int raspuns;
     std::vector<Film> filme;
@@ -187,6 +194,7 @@ int main() {
             }
 
             case 4: {
+                film_lista.clear();
                 int n;
                 std::cout << "cate filme doresti sa adaugi?\n";
                 std::cin >> n;
@@ -232,6 +240,7 @@ int main() {
                         std::cout << "alege ce doresti sa faci:\n";
                         std::cout << "1. afiseaza filmele vazute\n";
                         std::cout << "2. evalueaza un film\n";
+                        std::cout << "alegerea ta:\n";
                         std::cin >> raspuns;
                         switch (raspuns) {
                             case 1: {
@@ -239,17 +248,17 @@ int main() {
                                 break;
                             }
                             case 2: {
-                                int ok=0;
                                 std::cout << "ce film doresti sa evaluezi?\n";
                                 std::cin.ignore();
                                 std::getline(std::cin, filmulet, '\n');
                                 film_lista.push_back(filmulet);
-                                if (check_for_movie(filme, film_lista)) {
-                                    int rating;
-                                    std::cout << "ce rating doresti sa ii dai?";
+                                if (check_for_movie(filme, film_lista) != -1) {
+                                    float rating;
+                                    std::cout << "ce rating doresti sa ii dai?\n";
                                     std::cin >> rating;
                                     utilizatori[userId]->evalueazaFilm(filme[check_for_movie(filme, film_lista)], rating);
                                 }
+                                else std::cout << "nu am gasit filmul!\n";
                                 break;
                             }
                             default: {
@@ -260,7 +269,51 @@ int main() {
                         break;
                     }
                     case 2: {
-                        std::cout << "critic!\n";
+                        auto critic = dynamic_pointer_cast<Critic>(utilizatori[userId]);
+                        std::cout << "alege ce doresti sa faci:\n";
+                        std::cout << "1. afiseaza filmele vazute\n";
+                        std::cout << "2. evalueaza un film\n";
+                        std::cout << "3. scrie o recenzie\n";
+                        std::cout << "alegerea ta:\n";
+                        std::cin >> raspuns;
+                        switch (raspuns) {
+                            case 1: {
+                                critic->afiseazaFilmeVazute();
+                                break;
+                            }
+                            case 2: {
+                                std::cout << "ce film doresti sa evaluezi?\n";
+                                std::cin.ignore();
+                                std::getline(std::cin, filmulet, '\n');
+                                film_lista.push_back(filmulet);
+                                if (check_for_movie(filme, film_lista) != -1) {
+                                    float rating;
+                                    std::cout << "ce rating doresti sa ii dai?\n";
+                                    std::cin >> rating;
+                                    critic->evalueazaFilm(filme[check_for_movie(filme, film_lista)], rating);
+                                }
+                                else std::cout << "nu am gasit filmul!\n";
+                                break;
+                            }
+                            case 3: {
+                                std::cout << "pentru ce film doresti sa scrii o recenzie?\n";
+                                std::cin.ignore();
+                                std::getline(std::cin, filmulet, '\n');
+                                film_lista.push_back(filmulet);
+                                if (check_for_movie(filme, film_lista) != -1) {
+                                    std::string recenzie;
+                                    std::cout << "scrie recenzia:\n";
+                                    std::getline(std::cin, recenzie, '\n');
+                                    critic->scrieRecenzie(filme[check_for_movie(filme, film_lista)], recenzie);
+                                }
+                                else std::cout << "nu am gasit filmul!\n";
+                                break;
+                            }
+                            default: {
+                                std::cout << "nu inteleg.\n";
+                                break;
+                            }
+                        }
                         break;
                     }
                     case 3: {
@@ -279,6 +332,12 @@ int main() {
                 for (const auto &u : utilizatori) {
                     std::cout << *u << std::endl;
                 }
+                break;
+            }
+
+            case 8: {
+                srand(time(0));
+                std::cout << filme[rand() % filme.size()] << std::endl;
                 break;
             }
 
@@ -366,15 +425,42 @@ int main() {
                             utilizatori.push_back(std::make_shared<Utilizator>(adauga_admin(lista_filme)));
                         }
                         else std::cout << "niciun film nu a fost gasit!\n";
-
-
                         break;
                     }
                     default: {
-                        std::cout << "nu inteleg.";
+                        std::cout << "nu inteleg.\n";
                         break;
                     }
                 }
+                break;
+            }
+
+            case 10: {
+                std::cout << "pentru ce film doresti sa vezi evaluarile?\n";
+                std::cin.ignore();
+                std::getline(std::cin, filmulet, '\n');
+                film_lista.push_back(filmulet);
+                if (check_for_movie(filme, film_lista) != -1) {
+                    Evaluari::getEvaluare().afiseazaEvaluari(filme[check_for_movie(filme, film_lista)]);
+                }
+                else std::cout << "nu am gasit filmul!\n";
+                break;
+            }
+
+            case 11: {
+                std::cout << "pentru ce film doresti sa vezi recenziile?\n";
+                std::cin.ignore();
+                std::getline(std::cin, filmulet, '\n');
+                film_lista.push_back(filmulet);
+                if (check_for_movie(filme, film_lista) != -1) {
+                    Recenzii::getRecenzie().afiseazaRecenzii(filme[check_for_movie(filme, film_lista)]);
+                }
+                else std::cout << "nu am gasit filmul!\n";
+                break;
+            }
+
+            case 12: {
+                Utilizator::afiseazaIstoric();
                 break;
             }
 
