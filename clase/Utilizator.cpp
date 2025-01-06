@@ -20,6 +20,7 @@ void Utilizator::afiseazaFilmeVazute() const {
 
 void Utilizator::evalueazaFilm(const Film &film, float rating) const {
     Evaluari::getEvaluare().adaugaEvaluare(film, rating);
+    istoric.push_back(username + " a evaluat filmul " + film.getTitlu());
     std::cout << username << "(UTILIZATOR BASIC) a evaluat " << film.getTitlu() << " cu " << rating << " stele" << std::endl;
 }
 
@@ -40,6 +41,14 @@ std::string Utilizator::getUsername() const {
 int Utilizator::getRole() const {
     return 1;
 }
+
+void Utilizator::afiseazaIstoric() {
+    for (const auto &i : istoric) {
+        std::cout << i << std::endl;
+    }
+}
+
+std::vector<std::string> Utilizator::istoric = {};
 
 
 std::istream& operator>>(std::istream &in, Utilizator &util) {
