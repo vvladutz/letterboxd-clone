@@ -5,6 +5,7 @@
 #include "Film.h"
 #include "Evaluari.h"
 #include "Recenzii.h"
+#include "RecenzieException.h"
 
 Admin::Admin(const std::string &username, const int varsta, const std::vector<Film> &filme_vazute) : Utilizator(username, varsta, filme_vazute) {}
 
@@ -28,6 +29,9 @@ void Admin::evalueazaFilm(const Film& film, float rating) const {
 }
 
 void Admin::scrieRecenzie(const Film& film, std::string& recenzie) const {
+    if (recenzie.empty()) {
+        throw RecenzieException();
+    }
     std::cout << username << "(ADMIN) A SCRIS O RECENZIE PENTRU " << film.getTitlu() << ": " << recenzie << std::endl;
     istoric.push_back(username + " a scris o recenzie pentru filmul " + film.getTitlu());
     Recenzii::getRecenzie().adaugaRecenzie(film, recenzie);

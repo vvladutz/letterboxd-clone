@@ -5,6 +5,7 @@
 #include "Film.h"
 #include "Evaluari.h"
 #include "Recenzii.h"
+#include "RecenzieException.h"
 
 Critic::Critic(const std::string &username, const int varsta, const std::vector<Film> &filme_vazute) : Utilizator(username, varsta, filme_vazute) {}
 
@@ -28,6 +29,9 @@ void Critic::evalueazaFilm(const Film &film, float rating) const {
 }
 
 void Critic::scrieRecenzie(const Film &film, std::string &recenzie) const {
+    if (recenzie.empty()) {
+        throw RecenzieException();
+    }
     Recenzii::getRecenzie().adaugaRecenzie(film, recenzie);
     istoric.push_back(username + " a scris o recenzie pentru filmul " + film.getTitlu());
     std::cout << username << "(CRITIC) A SCRIS O RECENZIE PENTRU " << film << ": " << recenzie << std::endl;
