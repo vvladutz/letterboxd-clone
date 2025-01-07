@@ -143,7 +143,7 @@ int main() {
             switch (raspuns) {
                 case 0: {
                     std::cout << "multumesc pentru folosirea aplicatiei!" << std::endl;
-                    return false;
+                    return 0;
                 }
 
                 case 1: {

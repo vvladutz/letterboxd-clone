@@ -12,7 +12,7 @@ private:
     int durata;
     float rating;
 public:
-    Film(const std::string& _titlu, const std::string& _regizor,
+    Film(const std::string& _titlu="", const std::string& _regizor="",
         const int _anLansare, const int _durata, const float _rating);
 
     Film& operator=(const Film& other);

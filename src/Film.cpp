@@ -2,8 +2,8 @@
 #include <iostream>
 #include <string>
 
-Film::Film(const std::string& _titlu="", const std::string& _regizor="",
-        const int _anLansare=0, const int _durata=0, const float _rating=0)
+Film::Film(const std::string& _titlu, const std::string& _regizor,
+        const int _anLansare, const int _durata, const float _rating)
     : titlu{_titlu}, regizor{_regizor}, anLansare{_anLansare}, durata{_durata}, rating{_rating} {}
 
 Film& Film::operator=(const Film& other) {
