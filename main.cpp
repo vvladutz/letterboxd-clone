@@ -81,7 +81,7 @@ Admin adauga_admin(const Collection<Film>& filme) {
     return Admin(nume, varsta, filme);
 }
 
-int check_for_movie(const Collection<Film>& filme, std::vector<std::string> film) {
+int check_for_movie(const Collection<Film>& filme, const std::vector<std::string>& film) {
     for (const auto &f : filme)
         for (const auto &fl : film)
             if (fl == f.getTitlu())
