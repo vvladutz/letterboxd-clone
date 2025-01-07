@@ -3,8 +3,6 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include <map>
 
 class Film {
 private:
@@ -13,7 +11,6 @@ private:
     int anLansare;
     int durata;
     float rating;
-    bool vazut;
 public:
     Film(const std::string& _titlu, const std::string& _regizor,
         const int _anLansare, const int _durata, const float _rating);

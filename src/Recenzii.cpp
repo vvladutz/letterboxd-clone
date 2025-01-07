@@ -12,12 +12,12 @@ Recenzii &Recenzii::getRecenzie() {
     return recenzie;
 }
 
-void Recenzii::adaugaRecenzie(const Film &film, std::string& recenzie) {
+void Recenzii::adaugaRecenzie(const Film &film, const std::string& recenzie) {
     recenzii[film.getTitlu()].push_back(recenzie);
 }
 
 void Recenzii::afiseazaRecenzii(const Film &film) {
-    if (recenzii.find(film.getTitlu()) != recenzii.end()) {
+    if (recenzii.contains(film.getTitlu())) {
         std::cout << "recenzii pt: " << film.getTitlu() << std::endl;
         for (const auto& rating : recenzii[film.getTitlu()]) {
             std::cout << rating << std::endl;
@@ -28,9 +28,9 @@ void Recenzii::afiseazaRecenzii(const Film &film) {
     }
 }
 
-void Recenzii::stergeRecenzie(const Film &film, std::string& recenzie) {
-    if (recenzii.find(film.getTitlu()) != recenzii.end()) {
-        auto it = std::find(recenzii[film.getTitlu()].begin(), recenzii[film.getTitlu()].end(), recenzie);
+void Recenzii::stergeRecenzie(const Film &film, const std::string& recenzie) {
+    if (recenzii.contains(film.getTitlu())) {
+        auto it = std::ranges::find(recenzii[film.getTitlu()], recenzie);
         if (it != recenzii[film.getTitlu()].end()) {
             recenzii[film.getTitlu()].erase(it);
         } else {

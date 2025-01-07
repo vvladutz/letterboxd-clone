@@ -13,9 +13,9 @@ private:
     Recenzii();
 public:
     static Recenzii& getRecenzie();
-    void adaugaRecenzie(const Film& film, std::string& recenzie);
+    void adaugaRecenzie(const Film& film, const std::string& recenzie);
     void afiseazaRecenzii(const Film& film);
-    void stergeRecenzie(const Film &film, std::string& recenzie);
+    void stergeRecenzie(const Film &film, const std::string& recenzie);
 };
 
 

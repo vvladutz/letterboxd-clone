@@ -28,7 +28,7 @@ void Critic::evalueazaFilm(const Film &film, float rating) const {
     std::cout << username << "(CRITIC) a evaluat " << film << " cu " << rating << " stele" << std::endl;
 }
 
-void Critic::scrieRecenzie(const Film &film, std::string &recenzie) const {
+void Critic::scrieRecenzie(const Film &film, const std::string &recenzie) const {
     if (recenzie.empty()) {
         throw RecenzieException();
     }

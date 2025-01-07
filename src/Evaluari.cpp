@@ -17,7 +17,7 @@ void Evaluari::adaugaEvaluare(const Film &film, int rating) {
 }
 
 void Evaluari::afiseazaEvaluari(const Film &film) {
-    if (evaluari.find(film.getTitlu()) != evaluari.end()) {
+    if (evaluari.contains(film.getTitlu())) {
         std::cout << "evaluari pt: " << film.getTitlu() << std::endl;
         for (const auto& rating : evaluari[film.getTitlu()]) {
             std::cout << rating << std::endl;

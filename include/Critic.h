@@ -9,13 +9,14 @@
 class Critic : public Utilizator {
 public:
     Critic(const std::string& username, const int varsta, const std::vector<Film>& filme_vazute);
-    virtual ~Critic();
+
+    ~Critic() override;
     Critic(const Critic& other);
     Critic& operator=(const Critic& other);
 
     int getRole() const override;
     void evalueazaFilm(const Film& film, float rating) const override;
-    void scrieRecenzie(const Film& film, std::string& recenzie) const;
+    void scrieRecenzie(const Film& film, const std::string& recenzie) const;
     void afiseaza(std::ostream &os) const override;
 
     friend std::ostream& operator<<(std::ostream& os, const Critic& c);

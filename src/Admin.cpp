@@ -28,7 +28,7 @@ void Admin::evalueazaFilm(const Film& film, float rating) const {
     std::cout << username << "(ADMIN) a evaluat " << film.getTitlu() << " cu " << rating << " stele" << std::endl;
 }
 
-void Admin::scrieRecenzie(const Film& film, std::string& recenzie) const {
+void Admin::scrieRecenzie(const Film& film, const std::string& recenzie) const {
     if (recenzie.empty()) {
         throw RecenzieException();
     }
@@ -37,7 +37,7 @@ void Admin::scrieRecenzie(const Film& film, std::string& recenzie) const {
     Recenzii::getRecenzie().adaugaRecenzie(film, recenzie);
 }
 
-void Admin::stergeRecenzie(const Film& film, std::string &recenzie) const {
+void Admin::stergeRecenzie(const Film& film, const std::string &recenzie) const {
     Recenzii::getRecenzie().stergeRecenzie(film, recenzie);
     istoric.push_back(username + " a sters o recenzie pentru filmul " + film.getTitlu());
     std::cout << username << " (ADMIN) A STERS RECENZIA PENTRU " << film.getTitlu() << std::endl;

@@ -37,12 +37,11 @@ Lista adauga_lista(std::vector<Film>& filme) {
     std::cout << "descriere:\n";
     std::getline(std::cin, description, '\n');
 
-    Lista l(nume, description, filme);
     std::cout << "lista creata!\n";
-    return l;
+    return Lista(nume, description, filme);
 }
 
-Utilizator adauga_utilizator(std::vector<Film>& filme) {
+Utilizator adauga_utilizator(const std::vector<Film>& filme) {
     std::string nume;
     int varsta;
     std::cout << "username:\n";
@@ -50,12 +49,11 @@ Utilizator adauga_utilizator(std::vector<Film>& filme) {
     std::cout << "varsta:\n";
     std::cin >> varsta;
 
-    Utilizator u(nume, varsta, filme);
     std::cout << "utilizator creat!\n";
-    return u;
+    return Utilizator(nume, varsta, filme);
 }
 
-Critic adauga_critic(std::vector<Film>& filme) {
+Critic adauga_critic(const std::vector<Film>& filme) {
     std::string nume;
     int varsta;
     std::cout << "username:\n";
@@ -63,12 +61,12 @@ Critic adauga_critic(std::vector<Film>& filme) {
     std::cout << "varsta:\n";
     std::cin >> varsta;
 
-    Critic c(nume, varsta, filme);
+
     std::cout << "critic creat!\n";
-    return c;
+    return Critic(nume, varsta, filme);
 }
 
-Admin adauga_admin(std::vector<Film>& filme) {
+Admin adauga_admin(const std::vector<Film>& filme) {
     std::string nume;
     int varsta;
     std::cout << "username:\n";
@@ -76,12 +74,11 @@ Admin adauga_admin(std::vector<Film>& filme) {
     std::cout << "varsta:\n";
     std::cin >> varsta;
 
-    Admin a(nume, varsta, filme);
     std::cout << "admin creat!\n";
-    return a;
+    return Admin(nume, varsta, filme);
 }
 
-int check_for_movie(std::vector<Film>& filme, std::vector<std::string> film) {
+int check_for_movie(const std::vector<Film>& filme, std::vector<std::string> film) {
     for (const auto &f : filme)
         for (const auto &fl : film)
             if (fl == f.getTitlu())
@@ -91,12 +88,7 @@ int check_for_movie(std::vector<Film>& filme, std::vector<std::string> film) {
 }
 
 int main() {
-    int raspuns;
     std::vector<Film> filme;
-    std::vector<Lista> lista;
-    std::vector<std::string> film_lista;
-    std::vector<Film> lista_filme;
-    std::string filmulet;
     std::vector<std::shared_ptr<Utilizator>> utilizatori;
 
     filme.emplace_back("Evil Dead 2", "Sam Raimi", 1987, 84, 4.0);
@@ -121,8 +113,8 @@ int main() {
     filme.emplace_back("The Rocky Horror Picture Show", "Jim Sharman", 1975, 100, 4.0);
     filme.emplace_back("The Lord of the Rings: The Fellowship of the Ring", "Peter Jackson", 2001, 179, 4.4);
 
-    std::vector<Film>::const_iterator first = filme.begin() + 5;
-    std::vector<Film>::const_iterator last = filme.begin() + 7;
+    auto first = filme.begin() + 5;
+    auto last = filme.begin() + 7;
     std::vector<Film> newFilme(first, last);
     utilizatori.emplace_back(std::make_shared<Utilizator>("andi", 20, newFilme));
 
@@ -137,6 +129,11 @@ int main() {
     utilizatori.emplace_back(std::make_shared<Admin>("vvladutz", 21, newFilme));
 
     try {
+        int raspuns;
+        std::vector<Lista> lista;
+        std::vector<std::string> film_lista;
+        std::vector<Film> lista_filme;
+        std::string filmulet;
         while (true) {
             lista_filme.clear();
             print_menu();
@@ -338,7 +335,7 @@ int main() {
                 }
 
                 case 8: {
-                    srand(time(0));
+                    srand(time(nullptr));
                     std::cout << filme[rand() % filme.size()] << std::endl;
                     break;
                 }
