@@ -49,7 +49,7 @@ public:
     }
 
     const T& operator[](int index) const {
-        if (index >= 0 && index < elemente.size()) {
+        if (index >= 0 && index < static_cast<int>(elemente.size())) {
             return elemente.at(index);
         } else {
             throw std::out_of_range("Index invalid!");
