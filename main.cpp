@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <ctime>
+
+#include "UtilizatorFactory.h"
 #include "include/Film.h"
 #include "include/Lista.h"
 #include "include/Utilizator.h"
@@ -12,6 +14,7 @@
 #include "include/Evaluari.h"
 #include "include/RecenzieException.h"
 #include "include/Recenzii.h"
+#include "include/Collection.h"
 
 void print_menu() {
     std::cout << "1. adauga film" << std::endl;
@@ -30,7 +33,7 @@ void print_menu() {
     std::cout << "alegerea ta: \n";
 }
 
-Lista adauga_lista(std::vector<Film>& filme) {
+Lista adauga_lista(Collection<Film>& filme) {
     std::string nume, description;
     std::cout << "numele listei:\n";
     std::getline(std::cin, nume, '\n');
@@ -41,7 +44,7 @@ Lista adauga_lista(std::vector<Film>& filme) {
     return Lista(nume, description, filme);
 }
 
-Utilizator adauga_utilizator(const std::vector<Film>& filme) {
+Utilizator adauga_utilizator(const Collection<Film>& filme) {
     std::string nume;
     int varsta;
     std::cout << "username:\n";
@@ -53,7 +56,7 @@ Utilizator adauga_utilizator(const std::vector<Film>& filme) {
     return Utilizator(nume, varsta, filme);
 }
 
-Critic adauga_critic(const std::vector<Film>& filme) {
+Critic adauga_critic(const Collection<Film>& filme) {
     std::string nume;
     int varsta;
     std::cout << "username:\n";
@@ -66,7 +69,7 @@ Critic adauga_critic(const std::vector<Film>& filme) {
     return Critic(nume, varsta, filme);
 }
 
-Admin adauga_admin(const std::vector<Film>& filme) {
+Admin adauga_admin(const Collection<Film>& filme) {
     std::string nume;
     int varsta;
     std::cout << "username:\n";
@@ -78,7 +81,7 @@ Admin adauga_admin(const std::vector<Film>& filme) {
     return Admin(nume, varsta, filme);
 }
 
-int check_for_movie(const std::vector<Film>& filme, std::vector<std::string> film) {
+int check_for_movie(const Collection<Film>& filme, std::vector<std::string> film) {
     for (const auto &f : filme)
         for (const auto &fl : film)
             if (fl == f.getTitlu())
@@ -88,51 +91,54 @@ int check_for_movie(const std::vector<Film>& filme, std::vector<std::string> fil
 }
 
 int main() {
-    std::vector<Film> filme;
+    Collection<Film> filme;
     std::vector<std::shared_ptr<Utilizator>> utilizatori;
 
-    filme.emplace_back("Evil Dead 2", "Sam Raimi", 1987, 84, 4.0);
-    filme.emplace_back("Wild Strawberries", "Ingmar Bergman", 1957, 91, 4.3);
-    filme.emplace_back("Mystery Train", "Jim Jarmusch", 1989, 106, 4.0);
-    filme.emplace_back("High and Low", "Akira Kurosawa", 1963, 142, 4.6);
-    filme.emplace_back("In The Mood For Love", "Wong Kar-Wai", 2000, 99, 4.4);
-    filme.emplace_back("Chungking Express", "Wong Kar-Wai", 1994, 103, 4.3);
-    filme.emplace_back("Do The Right Thing", "Spike Lee", 1989, 120, 4.4);
-    filme.emplace_back("Interstellar", "Cristopher Nolan", 2014, 169, 4.4);
-    filme.emplace_back("Repo Man", "Alex Cox", 1984, 92, 3.7);
-    filme.emplace_back("Aftersun", "Charlotte Wells", 2022, 101, 4.2);
-    filme.emplace_back("The Thing", "John Carpenter", 1982, 109, 4.4);
-    filme.emplace_back("Little Shop of Horrors", "Frank Oz", 1986, 94, 3.9);
-    filme.emplace_back("Whiplash", "Damien Chazelle", 2014, 107, 4.4);
-    filme.emplace_back("Twin Peaks: Fire Walk With Me", "David Lynch", 1992, 135, 4.2);
-    filme.emplace_back("12 Angry Men", "Sidney Lumet", 1957, 97, 4.6);
-    filme.emplace_back("A Trip To The Moon", "Georges Méliès", 1902, 15, 4.0);
-    filme.emplace_back("Little Miss Sunshine", "Valerie Faris, Jonathan Dayton", 2006, 102, 4.2);
-    filme.emplace_back("The End of Evangelion", "Hideaki Anno, Kazuya Tsurumaki", 1997, 87, 4.5);
-    filme.emplace_back("House", "Nobuhiko Obayashi", 1977, 88, 4.0);
-    filme.emplace_back("The Rocky Horror Picture Show", "Jim Sharman", 1975, 100, 4.0);
-    filme.emplace_back("The Lord of the Rings: The Fellowship of the Ring", "Peter Jackson", 2001, 179, 4.4);
+    filme.adaugaElemente(Film("Evil Dead 2", "Sam Raimi", 1987, 84, 4.0));
+    filme.adaugaElemente(Film("Wild Strawberries", "Ingmar Bergman", 1957, 91, 4.3));
+    filme.adaugaElemente(Film("Mystery Train", "Jim Jarmusch", 1989, 106, 4.0));
+    filme.adaugaElemente(Film("High and Low", "Akira Kurosawa", 1963, 142, 4.6));
+    filme.adaugaElemente(Film("In The Mood For Love", "Wong Kar-Wai", 2000, 99, 4.4));
+    filme.adaugaElemente(Film("Chungking Express", "Wong Kar-Wai", 1994, 103, 4.3));
+    filme.adaugaElemente(Film("Do The Right Thing", "Spike Lee", 1989, 120, 4.4));
+    filme.adaugaElemente(Film("Interstellar", "Cristopher Nolan", 2014, 169, 4.4));
+    filme.adaugaElemente(Film("Repo Man", "Alex Cox", 1984, 92, 3.7));
+    filme.adaugaElemente(Film("Aftersun", "Charlotte Wells", 2022, 101, 4.2));
+    filme.adaugaElemente(Film("The Thing", "John Carpenter", 1982, 109, 4.4));
+    filme.adaugaElemente(Film("Little Shop of Horrors", "Frank Oz", 1986, 94, 3.9));
+    filme.adaugaElemente(Film("Whiplash", "Damien Chazelle", 2014, 107, 4.4));
+    filme.adaugaElemente(Film("Twin Peaks: Fire Walk With Me", "David Lynch", 1992, 135, 4.2));
+    filme.adaugaElemente(Film("12 Angry Men", "Sidney Lumet", 1957, 97, 4.6));
+    filme.adaugaElemente(Film("A Trip To The Moon", "Georges Méliès", 1902, 15, 4.0));
+    filme.adaugaElemente(Film("Little Miss Sunshine", "Valerie Faris, Jonathan Dayton", 2006, 102, 4.2));
+    filme.adaugaElemente(Film("The End of Evangelion", "Hideaki Anno, Kazuya Tsurumaki", 1997, 87, 4.5));
+    filme.adaugaElemente(Film("House", "Nobuhiko Obayashi", 1977, 88, 4.0));
+    filme.adaugaElemente(Film("The Rocky Horror Picture Show", "Jim Sharman", 1975, 100, 4.0));
+    filme.adaugaElemente(Film("The Lord of the Rings: The Fellowship of the Ring", "Peter Jackson", 2001, 179, 4.4));
 
     auto first = filme.begin() + 5;
     auto last = filme.begin() + 7;
-    std::vector<Film> newFilme(first, last);
-    utilizatori.emplace_back(std::make_shared<Utilizator>("andi", 20, newFilme));
+    Collection<Film> newFilme(first, last);
+    utilizatori.emplace_back(dynamic_pointer_cast<Utilizator>(UtilizatorFactory::creeazaUtilizator("Utilizator", "andi", 20, newFilme)));
 
     first = filme.begin() + 1;
     last = filme.begin() + 7;
     newFilme.assign(first, last);
-    utilizatori.emplace_back(std::make_shared<Critic>("diana072", 21, newFilme));
+    utilizatori.emplace_back(dynamic_pointer_cast<Utilizator>(UtilizatorFactory::creeazaUtilizator("Critic", "diana072", 21, newFilme)));
+
+
 
     first = filme.begin() + 10;
     last = filme.begin() + 15;
     newFilme.assign(first, last);
-    utilizatori.emplace_back(std::make_shared<Admin>("vvladutz", 21, newFilme));
+    utilizatori.emplace_back(dynamic_pointer_cast<Utilizator>(UtilizatorFactory::creeazaUtilizator("Admin", "vvladutz", 20, newFilme)));
+
 
     try {
         int raspuns;
         std::vector<Lista> lista;
         std::vector<std::string> film_lista;
-        std::vector<Film> lista_filme;
+        Collection<Film> lista_filme;
         std::string filmulet;
         while (true) {
             lista_filme.clear();
@@ -158,7 +164,7 @@ int main() {
                         }
                     }
                     if (!ok) {
-                        filme.push_back(f);
+                        filme.adaugaElemente(f);
                         std::cout << "film adaugat!\n";
                     }
                     break;
@@ -208,7 +214,7 @@ int main() {
                         for (const auto &fl : film_lista)
                             if (fl == f.getTitlu()) {
                                 std::cout << "film gasit!\n"; ok = 1;
-                                lista_filme.push_back(f);
+                                lista_filme.adaugaElemente(f);
                             }
                     }
                     if (ok) {
@@ -336,7 +342,7 @@ int main() {
 
                 case 8: {
                     srand(time(nullptr));
-                    std::cout << filme[rand() % filme.size()] << std::endl;
+                    std::cout << filme[rand() % filme.getSize()] << std::endl;
                     break;
                 }
 
@@ -364,7 +370,7 @@ int main() {
                                 for (const auto &fl : film_lista)
                                     if (fl == f.getTitlu()) {
                                         std::cout << "film gasit!\n"; ok = 1;
-                                        lista_filme.push_back(f);
+                                        lista_filme.adaugaElemente(f);
                                     }
                             }
                             if (ok) {
@@ -391,7 +397,7 @@ int main() {
                                 for (const auto &fl : film_lista)
                                     if (fl == f.getTitlu()) {
                                         std::cout << "film gasit!\n"; ok = 1;
-                                        lista_filme.push_back(f);
+                                        lista_filme.adaugaElemente(f);
                                     }
                             }
                             if (ok) {
@@ -417,7 +423,7 @@ int main() {
                                 for (const auto &fl : film_lista)
                                     if (fl == f.getTitlu()) {
                                         std::cout << "film gasit!\n"; ok = 1;
-                                        lista_filme.push_back(f);
+                                        lista_filme.adaugaElemente(f);
                                     }
                             }
                             if (ok) {

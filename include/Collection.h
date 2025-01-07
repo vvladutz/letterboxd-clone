@@ -1,0 +1,74 @@
+#ifndef COLLECTION_H
+#define COLLECTION_H
+
+#include <iostream>
+#include <vector>
+
+template <typename T>
+class Collection {
+private:
+    std::vector<T> elemente;
+public:
+    Collection() = default;
+    ~Collection() {
+        elemente.clear();
+    }
+
+    template <typename Iterator>
+    void assign(Iterator first, Iterator last) {
+        elemente.assign(first, last);
+    }
+
+    template <typename Iterator>
+    Collection(Iterator first, Iterator last) : elemente(first, last) {}
+
+    void adaugaElemente(const T& element) {
+        elemente.push_back(element);
+    }
+
+    void stergeElement(int index) {
+        if (index >= 0 && index < elemente.size()) {
+            elemente.erase(elemente.begin() + index);
+            std::cout << "ELEMENT STERS!\n";
+        } else {
+            std::cout << "INDEX INVALID!\n";
+        }
+    }
+
+    friend std::istream& operator>>(std::istream&, const T& e);
+
+    auto begin() {
+        return elemente.begin();
+    }
+
+    auto end() {
+        return elemente.end();
+    }
+
+    auto begin() const {
+        return elemente.begin();
+    }
+
+    auto end() const {
+        return elemente.end();
+    }
+
+    int getSize () const {
+        return elemente.size();
+    }
+
+    T& getElement(int index) const {
+        return elemente.at(index);
+    }
+
+    const T& operator[](int index) const {
+        return elemente.at(index);
+    }
+
+    void clear() {
+        elemente.clear();
+    }
+};
+
+
+#endif //COLLECTION_H
