@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Lista.h"
-#include "Film.h"
+#include "../include/Lista.h"
+#include "../clase/Film.h"
 
 Lista::Lista(std::string& _nume, std::string& _descriere, std::vector<Film>& _filme) : nume{std::move(_nume)},
                 descriere{std::move(_descriere)}, filme{std::move(_filme)} {}

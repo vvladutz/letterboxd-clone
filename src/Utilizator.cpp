@@ -1,9 +1,9 @@
-#include "Utilizator.h"
+#include "../include/Utilizator.h"
 #include <iostream>
 #include <vector>
 #include <string>
-#include "Film.h"
-#include "Evaluari.h"
+#include "../clase/Film.h"
+#include "../include/Evaluari.h"
 
 Utilizator::Utilizator(const std::string& _username, const int _varsta, const std::vector<Film>& _filme_vazute) : username{std::move(_username)},
                 varsta{_varsta}, filme_vazute{std::move(_filme_vazute)} {}

@@ -1,11 +1,11 @@
-#include "Admin.h"
+#include "../clase/Admin.h"
 #include <iostream>
 #include <vector>
 #include <string>
-#include "Film.h"
-#include "Evaluari.h"
-#include "Recenzii.h"
-#include "RecenzieException.h"
+#include "../clase/Film.h"
+#include "../include/Evaluari.h"
+#include "../clase/Recenzii.h"
+#include "../include/RecenzieException.h"
 
 Admin::Admin(const std::string &username, const int varsta, const std::vector<Film> &filme_vazute) : Utilizator(username, varsta, filme_vazute) {}
 

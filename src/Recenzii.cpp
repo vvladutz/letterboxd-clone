@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Recenzii.h"
+#include "../include/Recenzii.h"
 #include <string>
 #include <vector>
 #include <map>

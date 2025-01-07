@@ -1,4 +1,4 @@
-#include "RecenzieException.h"
+#include "../include/RecenzieException.h"
 #include <iostream>
 
 const char *RecenzieException::what() const noexcept {
