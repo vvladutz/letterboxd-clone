@@ -2,13 +2,13 @@
 #define CRITIC_H
 #include <iostream>
 #include <string>
-#include <vector>
 #include "Utilizator.h"
 #include "Film.h"
+#include "Collection.h"
 
 class Critic : public Utilizator {
 public:
-    Critic(const std::string& username, const int varsta, const std::vector<Film>& filme_vazute);
+    Critic(const std::string& username, const int varsta, const Collection<Film>& filme_vazute);
 
     ~Critic() override;
     Critic(const Critic& other);
@@ -17,7 +17,7 @@ public:
     int getRole() const override;
     void evalueazaFilm(const Film& film, float rating) const override;
     void scrieRecenzie(const Film& film, const std::string& recenzie) const;
-    void afiseaza(std::ostream &os) const override;
+    void afiseaza(std::ostream &os) const;
 
     friend std::ostream& operator<<(std::ostream& os, const Critic& c);
     friend std::istream& operator>>(std::istream&, Critic& c);

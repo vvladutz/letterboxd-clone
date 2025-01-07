@@ -5,7 +5,7 @@
 #include "../include/Film.h"
 #include "../include/Evaluari.h"
 
-Utilizator::Utilizator(const std::string& _username, const int _varsta, const std::vector<Film>& _filme_vazute) : username{std::move(_username)},
+Utilizator::Utilizator(const std::string& _username, const int _varsta, const Collection<Film>& _filme_vazute) : username{std::move(_username)},
                 varsta{_varsta}, filme_vazute{std::move(_filme_vazute)} {}
 
 Utilizator::~Utilizator() {
@@ -32,6 +32,10 @@ Utilizator& Utilizator::operator=(const Utilizator& other) {
         filme_vazute = other.filme_vazute;
     }
     return *this;
+}
+
+bool operator==(const Utilizator& u1, const Utilizator& u2) {
+    return u1.username == u2.username && u1.varsta == u2.varsta;
 }
 
 std::string Utilizator::getUsername() const {

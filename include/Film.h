@@ -13,11 +13,11 @@ private:
     float rating;
 public:
     Film(const std::string& _titlu="", const std::string& _regizor="",
-        const int _anLansare, const int _durata, const float _rating);
+        const int _anLansare=0, const int _durata=0, const float _rating=0);
 
     Film& operator=(const Film& other);
 
-    bool operator<(const Film& other) const;
+    bool operator<(const Film& other);
 
     friend std::ostream& operator<<(std::ostream&, const Film&);
     friend std::istream& operator>>(std::istream&, Film&);

@@ -3,8 +3,9 @@
 #include <vector>
 #include "../include/Lista.h"
 #include "../include/Film.h"
+#include "../include/Collection.h"
 
-Lista::Lista(std::string& _nume, std::string& _descriere, std::vector<Film>& _filme) : nume{std::move(_nume)},
+Lista::Lista(std::string& _nume, std::string& _descriere, Collection<Film>& _filme) : nume{std::move(_nume)},
                 descriere{std::move(_descriere)}, filme{std::move(_filme)} {}
 
 std::ostream& operator<<(std::ostream &os, const Lista &l) {
@@ -19,7 +20,6 @@ std::ostream& operator<<(std::ostream &os, const Lista &l) {
 }
 
 std::istream& operator>>(std::istream &in, Lista &l) {
-    std::string nume, description;
     std::cout << "numele listei:\n";
     std::getline(in, l.nume, '\n');
     std::cout << "descriere:\n";
@@ -32,7 +32,7 @@ std::string Lista::getNume() const {
     return nume;
 }
 
-std::vector<Film> Lista::getFilme() const {
+Collection<Film> Lista::getFilme() const {
     return filme;
 }
 
@@ -43,7 +43,7 @@ float Lista::average_rating() const {
         avg += f.getRating();
     };
 
-    return avg / static_cast<float>(filme.size());
+    return avg / static_cast<float>(filme.getSize());
 }
 
 

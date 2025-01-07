@@ -7,7 +7,7 @@
 #include "../include/Recenzii.h"
 #include "../include/RecenzieException.h"
 
-Critic::Critic(const std::string &username, const int varsta, const std::vector<Film> &filme_vazute) : Utilizator(username, varsta, filme_vazute) {}
+Critic::Critic(const std::string &username, const int varsta, const Collection<Film> &filme_vazute) : Utilizator(username, varsta, filme_vazute) {}
 
 Critic::~Critic() {
     filme_vazute.clear();

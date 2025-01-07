@@ -141,7 +141,10 @@ add_executable(${PROJECT_NAME} main.cpp ${SOURCES}
         src/Recenzii.cpp
         include/RecenzieException.h
         src/RecenzieException.cpp
-        include/EvaluareException.h)
+        include/EvaluareException.h
+        include/Collection.h
+        include/UtilizatorAbstract.h
+        include/UtilizatorFactory.h)
 
 ###############################################################################
 
@@ -198,6 +201,8 @@ add_executable(
         ${HEADERS}
         ${TESTS}
         ${SOURCES}
+        src/UtilizatorAbstract.cpp
+        src/UtilizatorFactory.cpp
 )
 
 target_link_libraries(

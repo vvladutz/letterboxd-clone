@@ -5,10 +5,11 @@
 #include <vector>
 #include <string>
 #include "Utilizator.h"
+#include "UtilizatorAbstract.h"
 
 class Admin : public Utilizator {
 public:
-    Admin(const std::string& nume, const int varsta, const std::vector<Film>& filme_vazute);
+    Admin(const std::string& nume, const int varsta, const Collection<Film>& filme_vazute);
 
     ~Admin() override;
     Admin(const Admin& other);

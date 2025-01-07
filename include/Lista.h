@@ -2,21 +2,21 @@
 #define LISTA_H
 #include <iostream>
 #include <string>
-#include <vector>
 #include "../include/Film.h"
+#include "../include/Collection.h"
 
 class Lista {
 private:
     std::string nume;
     std::string descriere;
-    std::vector<Film> filme;
+    Collection<Film> filme;
 public:
-    Lista(std::string& _nume, std::string& _descriere, std::vector<Film>& _filme);
+    Lista(std::string& _nume, std::string& _descriere, Collection<Film>& _filme);
     ~Lista();
 
     [[nodiscard]] std::string getNume() const;
 
-    [[nodiscard]] std::vector<Film> getFilme() const;
+    [[nodiscard]] Collection<Film> getFilme() const;
 
     friend std::ostream& operator<<(std::ostream& os, const Lista& l);
     friend std::istream& operator>>(std::istream&, Lista &l);
