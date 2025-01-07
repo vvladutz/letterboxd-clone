@@ -476,6 +476,9 @@ int main() {
 
             }
         }
+        lista_filme.clear();
+        film_lista.clear();
+        filmulet.clear();
     }
     catch (const RecenzieException& e) {
         std::cout << e.what() << std::endl;
@@ -483,4 +486,6 @@ int main() {
     catch (const std::exception& e) {
         std::cout << e.what() << std::endl;
     }
+    utilizatori.clear();
+    filme.clear();
 }
