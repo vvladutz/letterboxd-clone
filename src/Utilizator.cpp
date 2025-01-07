@@ -16,7 +16,7 @@ Utilizator::Utilizator(const Utilizator &other) : username(other.username), vars
 
 
 void Utilizator::afiseazaFilmeVazute() const {
-        for (auto& film : filme_vazute) {
+        for (const auto& film : filme_vazute) {
             std::cout << film << std::endl;
         }
 }
@@ -41,7 +41,7 @@ bool operator==(const Utilizator& u1, const Utilizator& u2) {
     return u1.username == u2.username && u1.varsta == u2.varsta;
 }
 
-std::string Utilizator::getUsername() const {
+const std::string& Utilizator::getUsername() const {
     return username;
 }
 

@@ -18,7 +18,7 @@ public:
     Utilizator(const std::string& username, const int varsta, const Collection<Film>& filme_vazute);
     virtual ~Utilizator() override;
     Utilizator(const Utilizator& other);
-    std::string getUsername() const;
+    const std::string& getUsername() const;
     virtual int getRole() const;
     virtual void afiseazaFilmeVazute() const;
     virtual void evalueazaFilm(const Film& film, float rating) const;
