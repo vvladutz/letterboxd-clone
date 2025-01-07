@@ -14,10 +14,6 @@ public:
     Lista(std::string& _nume, std::string& _descriere, Collection<Film>& _filme);
     ~Lista();
 
-    [[nodiscard]] std::string getNume() const;
-
-    [[nodiscard]] Collection<Film> getFilme() const;
-
     friend std::ostream& operator<<(std::ostream& os, const Lista& l);
     friend std::istream& operator>>(std::istream&, Lista &l);
 

@@ -27,15 +27,6 @@ std::istream& operator>>(std::istream &in, Lista &l) {
     return in;
 }
 
-std::string Lista::getNume() const {
-    return nume;
-}
-
-Collection<Film> Lista::getFilme() const {
-    return filme;
-}
-
-
 float Lista::average_rating() const {
     float avg = 0.0;
     for (const auto &f : filme) {
