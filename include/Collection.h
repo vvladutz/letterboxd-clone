@@ -26,15 +26,6 @@ public:
         elemente.push_back(element);
     }
 
-    void stergeElement(int index) {
-        if (index >= 0 && index < elemente.size()) {
-            elemente.erase(elemente.begin() + index);
-            std::cout << "ELEMENT STERS!\n";
-        } else {
-            std::cout << "INDEX INVALID!\n";
-        }
-    }
-
     template <typename U>
     friend std::istream& operator>>(std::istream&, Collection<U>&);
 
@@ -56,10 +47,6 @@ public:
 
     int getSize () const {
         return elemente.size();
-    }
-
-    T& getElement(int index) const {
-        return elemente.at(index);
     }
 
     const T& operator[](int index) const {
