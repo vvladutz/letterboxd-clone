@@ -16,7 +16,7 @@ protected:
 
 public:
     Utilizator(const std::string& username, const int varsta, const Collection<Film>& filme_vazute);
-    virtual ~Utilizator();
+    virtual ~Utilizator() override;
     Utilizator(const Utilizator& other);
     std::string getUsername() const;
     virtual int getRole() const;

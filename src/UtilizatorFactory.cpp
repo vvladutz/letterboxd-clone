@@ -1,5 +1,4 @@
 #include "../include/UtilizatorFactory.h"
-#include <iostream>
 #include <memory>
 #include "../include/Admin.h"
 #include "../include/Utilizator.h"

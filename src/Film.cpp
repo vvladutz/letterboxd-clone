@@ -15,7 +15,7 @@ Film& Film::operator=(const Film& other) {
     return *this;
 }
 
-bool Film::operator< (const Film &other) {
+bool Film::operator< (const Film &other) const {
     return (this->titlu < other.titlu);
 }
 

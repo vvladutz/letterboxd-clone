@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <vector>
 #include "../include/Lista.h"
 #include "../include/Film.h"
 #include "../include/Collection.h"

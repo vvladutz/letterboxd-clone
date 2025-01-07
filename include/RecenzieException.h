@@ -1,7 +1,6 @@
 #ifndef RECENZIEEXCEPTION_H
 #define RECENZIEEXCEPTION_H
 
-#include <iostream>
 #include <exception>
 
 class RecenzieException : public std::exception {

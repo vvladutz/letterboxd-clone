@@ -1,7 +1,6 @@
 #ifndef EVALUAREEXCEPTION_H
 #define EVALUAREEXCEPTION_H
 
-#include <iostream>
 #include <exception>
 
 class EvaluareException : public std::exception {

@@ -2,10 +2,9 @@
 #define ADMIN_H
 
 #include <iostream>
-#include <vector>
 #include <string>
 #include "Utilizator.h"
-#include "UtilizatorAbstract.h"
+
 
 class Admin : public Utilizator {
 public:

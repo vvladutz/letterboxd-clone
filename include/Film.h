@@ -17,7 +17,7 @@ public:
 
     Film& operator=(const Film& other);
 
-    bool operator<(const Film& other);
+    bool operator<(const Film& other) const;
 
     friend std::ostream& operator<<(std::ostream&, const Film&);
     friend std::istream& operator>>(std::istream&, Film&);
