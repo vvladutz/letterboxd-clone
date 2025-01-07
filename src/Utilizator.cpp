@@ -12,6 +12,9 @@ Utilizator::~Utilizator() {
     filme_vazute.clear();
 }
 
+Utilizator::Utilizator(const Utilizator &other) : username(other.username), varsta(other.varsta), filme_vazute(other.filme_vazute) {}
+
+
 void Utilizator::afiseazaFilmeVazute() const {
         for (auto& film : filme_vazute) {
             std::cout << film << std::endl;

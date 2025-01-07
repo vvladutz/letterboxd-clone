@@ -35,7 +35,8 @@ public:
         }
     }
 
-    friend std::istream& operator>>(std::istream&, const T& e);
+    template <typename U>
+    friend std::istream& operator>>(std::istream&, Collection<U>&);
 
     auto begin() {
         return elemente.begin();
@@ -69,6 +70,15 @@ public:
         elemente.clear();
     }
 };
+
+template <typename U>
+std::istream& operator>>(std::istream& is, Collection<U>& collection) {
+    U element;
+    while (is >> element) {
+        collection.adaugaElemente(element);
+    }
+    return is;
+}
 
 
 #endif //COLLECTION_H
