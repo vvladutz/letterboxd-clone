@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/Evaluari.h"
+#include "../include/Film.h"
 #include <string>
 #include <vector>
 #include <map>

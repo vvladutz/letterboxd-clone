@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "../include/Lista.h"
-#include "../clase/Film.h"
+#include "../include/Film.h"
 
 Lista::Lista(std::string& _nume, std::string& _descriere, std::vector<Film>& _filme) : nume{std::move(_nume)},
                 descriere{std::move(_descriere)}, filme{std::move(_filme)} {}

@@ -2,10 +2,10 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "../clase/Film.h"
+#include "../include/Film.h"
 #include "../include/Evaluari.h"
 #include "../include/Recenzii.h"
-#include "../clase/RecenzieException.h"
+#include "../include/RecenzieException.h"
 
 Critic::Critic(const std::string &username, const int varsta, const std::vector<Film> &filme_vazute) : Utilizator(username, varsta, filme_vazute) {}
 

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "../clase/Film.h"
+#include "../include/Film.h"
 #include "../include/Evaluari.h"
 
 Utilizator::Utilizator(const std::string& _username, const int _varsta, const std::vector<Film>& _filme_vazute) : username{std::move(_username)},

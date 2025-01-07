@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "../clase/Film.h"
+#include "../include/Film.h"
 
 class Lista {
 private:

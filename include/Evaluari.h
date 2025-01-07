@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "../clase/Film.h"
+#include "../include/Film.h"
 
 class Evaluari {
 private:
