@@ -475,10 +475,10 @@ int main() {
                 }
 
             }
+            lista_filme.clear();
+            film_lista.clear();
+            filmulet.clear();
         }
-        lista_filme.clear();
-        film_lista.clear();
-        filmulet.clear();
     }
     catch (const RecenzieException& e) {
         std::cout << e.what() << std::endl;

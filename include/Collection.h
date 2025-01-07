@@ -1,7 +1,6 @@
 #ifndef COLLECTION_H
 #define COLLECTION_H
 
-#include <iostream>
 #include <vector>
 
 template <typename T>
@@ -50,7 +49,11 @@ public:
     }
 
     const T& operator[](int index) const {
-        return elemente.at(index);
+        if (index >= 0 && index < elemente.size()) {
+            return elemente.at(index);
+        } else {
+            throw std::out_of_range("Index invalid!");
+        }
     }
 
     void clear() {
