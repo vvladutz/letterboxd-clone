@@ -122,19 +122,19 @@ int main() {
     auto first = filme.begin() + 5;
     auto last = filme.begin() + 7;
     Collection<Film> newFilme(first, last);
-    utilizatori.emplace_back(dynamic_pointer_cast<Utilizator>(UtilizatorFactory::creeazaUtilizator("Utilizator", "andi", 20, newFilme)));
+    utilizatori.emplace_back(std::dynamic_pointer_cast<Utilizator>(UtilizatorFactory::creeazaUtilizator("Utilizator", "andi", 20, newFilme)));
 
     first = filme.begin() + 1;
     last = filme.begin() + 7;
     newFilme.assign(first, last);
-    utilizatori.emplace_back(dynamic_pointer_cast<Utilizator>(UtilizatorFactory::creeazaUtilizator("Critic", "diana072", 21, newFilme)));
+    utilizatori.emplace_back(std::dynamic_pointer_cast<Utilizator>(UtilizatorFactory::creeazaUtilizator("Critic", "diana072", 21, newFilme)));
 
 
 
     first = filme.begin() + 10;
     last = filme.begin() + 15;
     newFilme.assign(first, last);
-    utilizatori.emplace_back(dynamic_pointer_cast<Utilizator>(UtilizatorFactory::creeazaUtilizator("Admin", "vvladutz", 20, newFilme)));
+    utilizatori.emplace_back(std::dynamic_pointer_cast<Utilizator>(UtilizatorFactory::creeazaUtilizator("Admin", "vvladutz", 20, newFilme)));
 
 
     try {
