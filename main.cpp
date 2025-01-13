@@ -5,7 +5,7 @@
 #include <vector>
 #include <ctime>
 
-#include "UtilizatorFactory.h"
+#include "include/UtilizatorFactory.h"
 #include "include/Film.h"
 #include "include/Lista.h"
 #include "include/Utilizator.h"
@@ -81,14 +81,17 @@ Admin adauga_admin(const Collection<Film>& filme) {
     return Admin(nume, varsta, filme);
 }
 
-int check_for_movie(const Collection<Film>& filme, const std::vector<std::string>& film) {
-    for (const auto &f : filme)
-        for (const auto &fl : film)
-            if (fl == f.getTitlu())
-                return &f-&filme[0];
-
+int check_for_movie(const Collection<Film>& filme, const std::vector<std::string>& film_list) {
+    for (size_t i = 0; i < filme.getSize(); ++i) {
+        for (const auto& fl : film_list) {
+            if (filme[i].getTitlu() == fl) {
+                return i;
+            }
+        }
+    }
     return -1;
 }
+
 
 int main() {
     Collection<Film> filme;
@@ -240,6 +243,11 @@ int main() {
                         std::cout << ++crt << ". " << u->getUsername() << std::endl;
                     }
                     std::cin >> userId;
+                    if (userId <= 0 || userId > utilizatori.size()) {
+                        std::cout << "ID utilizator invalid!\n";
+                        break;
+                    }
+
                     switch (utilizatori[--userId]->getRole()) {
                         case 1: {
                             std::cout << "alege ce doresti sa faci:\n";
